@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <Navbar className={theme === "light" ? "bg-peach" : "bg-grey"}>
       <Container className="fw-bold fs-3 d-flex justify-content-around">
-        <div>Codolio_Assignment</div>
+        <div>Finacial Tracker</div>
         <button
           className="btn btn-transparent d-flex align-items-center"
           onClick={toggleTheme}
