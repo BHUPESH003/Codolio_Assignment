@@ -1,0 +1,29 @@
+.charts-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .chart {
+    width: 100%;
+    max-width: 40%;
+    margin: 0 auto;
+  }
+  
+  .total-summary {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .total-income {
+    color: green;
+    background-color: #e0f8e0;
+  }
+  
+  .total-expense {
+    color: red;
+    background-color: #f8d7da;
+  }
+  

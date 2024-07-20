@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+}
+:root {
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #212529;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bs-body-bg: #212529;
+  --bs-body-color: #ffffff;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark: #343a40;
+}
+
+.bg-peach {
+  background-color: rgb(239, 229, 220);
+}
+.bg-grey {
+  background-color: rgb(181, 179, 179);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Base font size for the root element */
+html {
+  font-size: 16px; /* This sets the base font size to 16px, so 1rem = 16px */
+}
+
+/* Responsive font sizes for different elements */
+body {
+  font-size: 1rem; /* 16px */
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+}
+
+h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+h5 {
+  font-size: 1.25rem; /* 20px */
+}
+span {
+  font-size: 1.25rem; /* 20px */
+}
+div{
+  font-size: 1.25rem; /* 20px */
+}
+
+h6 {
+  font-size: 1rem; /* 16px */
+}
+
+p {
+  font-size: 1rem; /* 16px */
+}
+
+/* Media queries for responsive font sizes */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  html {
+    font-size: 14px; /* 1rem = 14px */
+  }
+
+  h1 {
+    font-size: 2rem; /* 28px */
+  }
+
+  h2 {
+    font-size: 1.75rem; /* 24px */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 21px */
+  }
+
+  h4 {
+    font-size: 1.25rem; /* 18px */
+  }
+
+  span {
+    font-size: 1rem; /* 14px */
+  }
+  div{
+    font-size: 1rem; /* 20px */
+  }
+
+  h6 {
+    font-size: 0.875rem; /* 12px */
+  }
+
+  p {
+    font-size: 0.875rem; /* 12px */
+  }
+}
+
+/* Medium devices (tablets, 600px to 900px) */
+@media (min-width: 600px) and (max-width: 900px) {
+  html {
+    font-size: 15px; /* 1rem = 15px */
+  }
+
+  h1 {
+    font-size: 2.25rem; /* 33px */
+  }
+
+  h2 {
+    font-size: 2rem; /* 30px */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* 26px */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* 22px */
+  }
+
+  span {
+    font-size: 1.25rem; /* 18px */
+  }
+  div{
+    font-size: 1.25rem; /* 20px */
+  }
+
+  h6 {
+    font-size: 1rem; /* 15px */
+  }
+
+  p {
+    font-size: 1rem; /* 15px */
+  }
+}
+
+/* Large devices (desktops, 900px and up) */
+@media (min-width: 900px) {
+  html {
+    font-size: 16px; /* 1rem = 16px */
+  }
+
+  h1 {
+    font-size: 2.5rem; /* 40px */
+  }
+
+  h2 {
+    font-size: 2rem; /* 32px */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* 28px */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  span {
+    font-size: 1.25rem; /* 20px */
+  }
+  div{
+    font-size: 1.25rem; /* 20px */
+  }
+
+  h6 {
+    font-size: 1rem; /* 16px */
+  }
+
+  p {
+    font-size: 1rem; /* 16px */
+  }
+}

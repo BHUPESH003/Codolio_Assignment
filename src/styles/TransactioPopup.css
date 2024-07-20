@@ -1,0 +1,39 @@
+/* Ensure .custom-modal is a wrapper around your tabs */
+.custom-modal .nav-tabs .nav-link.active {
+  text-decoration: none;
+  color: aliceblue;
+  background-color: #232624 !important; /* Light green for Income */
+}
+
+.custom-modal .nav-link{
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: brown; /* Dark grey for tab text */
+}
+.custom-modal .nav-link:hover{
+  color:brown; /* Dark grey for tab text */
+}
+
+/* Styles for inactive tabs */
+.custom-modal .nav-tabs .nav-link {
+  background-color: transparent !important;
+}
+
+/* Additional styles for form labels and controls */
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  width: 30%;
+  font-weight: bold;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.form-control {
+  flex: 1;
+  background-color: #f0f0f0; /* Greyish background */
+}
