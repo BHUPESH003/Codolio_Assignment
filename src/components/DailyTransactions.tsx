@@ -18,24 +18,24 @@ interface DailyTransactionListProps {
   transactionsByDate: { [date: string]: Transaction[] };
   onUpdateTransaction: (transaction: Transaction) => void;
   onSelectTransaction: (transaction: Transaction) => void;
-  onDeleteTransaction: (transaction: Transaction) => void; // Added delete handler
+  onDeleteTransaction: (transaction: Transaction) => void;
 }
 
 const getCategoryBgColor = (category: string): string => {
   switch (category) {
     case "Salary":
     case "Investment":
-      return "bg-success text-white"; // Green background for income
+      return "bg-success text-white";
     case "Rent":
-      return "bg-danger text-white"; // Red background for rent
+      return "bg-danger text-white";
     case "Utilities":
-      return "bg-warning text-dark"; // Yellow background for utilities
+      return "bg-warning text-dark";
     case "Groceries":
-      return "bg-info text-dark"; // Blue background for groceries
+      return "bg-info text-dark";
     case "Entertainment":
-      return "bg-primary text-white"; // Dark blue background for entertainment
+      return "bg-primary text-white";
     default:
-      return "bg-secondary text-white"; // Grey background for other categories
+      return "bg-secondary text-white";
   }
 };
 
@@ -43,7 +43,7 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
   transactionsByDate,
   onUpdateTransaction,
   onSelectTransaction,
-  onDeleteTransaction, // Added delete handler
+  onDeleteTransaction,
 }) => {
   return (
     <div className="transaction-list">
@@ -74,7 +74,7 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
             </div>
             {dailyTransactions.map((transaction) => (
               <div
-                key={transaction.id} // Use unique id for key
+                key={transaction.id}
                 className="transaction-item d-flex justify-content-between align-items-center mb-2 p-2"
                 onClick={() => onSelectTransaction(transaction)}
                 style={{ cursor: "pointer" }}
@@ -87,7 +87,9 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
                   >
                     {transaction.category}
                   </span>
-                  <span className="title fw-semibold w-100 mx-2">{transaction.title}</span>
+                  <span className="title fw-semibold w-100 mx-2">
+                    {transaction.title}
+                  </span>
                 </div>
                 <div>
                   <span
@@ -99,15 +101,16 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
                   >
                     {parseFloat(transaction.amount).toFixed(0)}
                   </span>
-                  <Button
-                    variant="danger"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent the click from selecting the transaction
-                      onDeleteTransaction(transaction); // Call delete handler
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </Button>
+                 
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDeleteTransaction(transaction);
+                      }}
+                      size="sm"
+                      color="red"
+                    />
                 </div>
               </div>
             ))}

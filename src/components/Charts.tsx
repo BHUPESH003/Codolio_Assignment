@@ -23,18 +23,36 @@ const Charts: React.FC<ChartsProps> = ({ transactions }) => {
   const { income, expense, totalIncome, totalExpense } =
     prepareChartData(transactions);
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false, // Hide default legend
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const label = context.label || "";
+            const value = context.raw as number;
+            return `${label}: ${value.toFixed(0)}`;
+          },
+        },
+      },
+    },
+  };
+
   return (
     <div className="charts-container">
       <div className="chart">
-        <Pie data={income} />
+        <Pie data={income} options={options} />
         <div className="total-summary total-income">
-          Total Income: {totalIncome.toFixed(2)}
+          Total Income: {totalIncome.toFixed(0)}
         </div>
       </div>
       <div className="chart">
-        <Pie data={expense} />
+        <Pie data={expense} options={options} />
         <div className="total-summary total-expense">
-          Total Expenses: {totalExpense.toFixed(2)}
+          Total Expenses: {totalExpense.toFixed(0)}
         </div>
       </div>
     </div>
