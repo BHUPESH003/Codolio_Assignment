@@ -5,13 +5,14 @@ import '../styles/TransactioPopup.css'; // Corrected file name
 type CategoryType = "Income" | "Expense";
 
 interface Transaction {
-  id: string; // Unique identifier
-  date: string;
-  amount: string;
+  id: number;
+  dateTime: string;
+  amount: number;
+  type: "Income" | "Expense";
   category: string;
   title: string;
-  notes: string;
-  type: CategoryType;
+  currency: string;
+  note: string;
 }
 
 const categories: Record<CategoryType, string[]> = {
@@ -26,6 +27,11 @@ interface TransactionPopupProps {
   onSave: (transaction: Transaction) => void;
 }
 
+const generateUID = () => {
+  // Generate a random integer between 1000 and 100000
+  return Math.floor(Math.random() * (100000 - 1000 + 1)) + 1000;
+};
+
 const TransactionPopup: React.FC<TransactionPopupProps> = ({
   show,
   onHide,
@@ -34,12 +40,13 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
 }) => {
   const [activeKey, setActiveKey] = useState<CategoryType>("Income");
   const [form, setForm] = useState<Transaction>({
-    id: "", // Ensure this is included
-    date: "",
-    amount: "",
+    id: -100, // Ensure this is included
+    dateTime: "",
+    amount: 0,
     category: categories["Income"][0],
     title: "",
-    notes: "",
+    note: "",
+    currency:"",
     type: "Income",
   });
 
@@ -49,12 +56,13 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
       setActiveKey(transaction.type);
     } else {
       setForm({
-        id: "", // Reset ID for new transaction
-        date: "",
-        amount: "",
+        id: generateUID(), // Assign a new UID for new transactions
+        dateTime: "",
+        amount: 0,
         category: categories["Income"][0],
         title: "",
-        notes: "",
+        note: "",
+        currency:"",
         type: "Income",
       });
     }
@@ -77,20 +85,22 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
       }));
     }
   };
+
   const handleResetForm = () => {
     setForm({
-      id: '', // Reset id to default
-      date: "",
-      amount: "",
+      id: generateUID(), // Assign a new UID for new transactions
+      dateTime: "",
+      amount: 0,
       category: categories[activeKey][0],
       title: "",
-      notes: "",
+      note: "",
+      currency:"",
       type: activeKey,
     });
   };
 
   const handleSubmit = () => {
-    if (form.date && form.amount && form.title) {
+    if (form.dateTime && form.amount && form.title) {
       onSave(form);
       handleResetForm();
       onHide();
@@ -119,8 +129,8 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
             <Form.Label className="form-label">Date</Form.Label>
             <Form.Control
               type="date"
-              name="date"
-              value={form.date}
+              name="dateTime"
+              value={form.dateTime}
               onChange={handleInputChange}
               required
               className="form-control"
@@ -174,8 +184,8 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
             <Form.Control
               as="textarea"
               rows={3}
-              name="notes"
-              value={form.notes}
+              name="note"
+              value={form.note}
               onChange={handleInputChange}
               className="form-control"
             />

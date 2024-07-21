@@ -1,17 +1,17 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 interface Transaction {
-  id: string; // Unique identifier
-  date: string;
-  amount: string;
+  id: number;
+  dateTime: string;
+  amount: number;
+  type: "Income" | "Expense";
   category: string;
   title: string;
-  notes: string;
-  type: "Income" | "Expense";
+  currency: string;
+  note: string;
 }
 
 interface DailyTransactionListProps {
@@ -51,11 +51,11 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
         const dailyTransactions = transactionsByDate[date];
         const totalIncome = dailyTransactions
           .filter((t) => t.type === "Income")
-          .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+          .reduce((sum, t) => sum + +t.amount, 0);
 
         const totalExpense = dailyTransactions
           .filter((t) => t.type === "Expense")
-          .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+          .reduce((sum, t) => sum + +t.amount, 0);
 
         const formattedDay = dayjs(date).format("dddd, D");
 
@@ -64,12 +64,14 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
             <div className="d-flex justify-content-between mb-2">
               <div className="fw-semibold">{formattedDay}</div>
               <div className="totals d-flex">
-                <div className="text-success fw-bold mx-2">
-                  {totalIncome.toFixed(0)}
-                </div>
-                <div className="text-danger fw-bold mx-2">
-                  {totalExpense.toFixed(0)}
-                </div>
+                <div className="text-success fw-bold mx-2">{totalIncome.toLocaleString(undefined, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}</div>
+                <div className="text-danger fw-bold mx-2">{totalExpense.toLocaleString(undefined, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}</div>
               </div>
             </div>
             {dailyTransactions.map((transaction) => (
@@ -79,15 +81,15 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
                 onClick={() => onSelectTransaction(transaction)}
                 style={{ cursor: "pointer" }}
               >
-                <div className="w-75 d-flex align-items-center">
+                <div className="w-75 d-flex align-items-center p-2">
                   <span
                     className={`category ${getCategoryBgColor(
                       transaction.category
-                    )} p-1 rounded fw-semibold`}
+                    )} p-1 rounded fw-semibold w-25 text-center`} style={{fontSize:'1.7vw'}}
                   >
                     {transaction.category}
                   </span>
-                  <span className="title fw-semibold w-100 mx-2">
+                  <span className="title fw-semibold w-75 mx-2">
                     {transaction.title}
                   </span>
                 </div>
@@ -99,18 +101,21 @@ const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
                         : "text-danger"
                     }`}
                   >
-                    {parseFloat(transaction.amount).toFixed(0)}
+                    {transaction.amount.toLocaleString(undefined, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}{" "}
                   </span>
-                 
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onDeleteTransaction(transaction);
-                      }}
-                      size="sm"
-                      color="red"
-                    />
+
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteTransaction(transaction);
+                    }}
+                    size="sm"
+                    color="red"
+                  />
                 </div>
               </div>
             ))}

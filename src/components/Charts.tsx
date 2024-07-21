@@ -6,13 +6,14 @@ import "../styles/charts.css";
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 interface Transaction {
-  id: string;
-  date: string;
-  amount: string;
+  id: number;
+  dateTime: string;
+  amount: number;
+  type: "Income" | "Expense";
   category: string;
   title: string;
-  notes: string;
-  type: "Income" | "Expense";
+  currency: string;
+  note: string;
 }
 
 interface ChartsProps {
@@ -46,13 +47,19 @@ const Charts: React.FC<ChartsProps> = ({ transactions }) => {
       <div className="chart">
         <Pie data={income} options={options} />
         <div className="total-summary total-income">
-          Total Income: {totalIncome.toFixed(0)}
+          Total Income: {totalIncome.toLocaleString(undefined, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}
         </div>
       </div>
       <div className="chart">
         <Pie data={expense} options={options} />
         <div className="total-summary total-expense">
-          Total Expenses: {totalExpense.toFixed(0)}
+          Total Expenses: {totalExpense.toLocaleString(undefined, {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}
         </div>
       </div>
     </div>

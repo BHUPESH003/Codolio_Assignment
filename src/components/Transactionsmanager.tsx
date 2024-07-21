@@ -10,21 +10,24 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import Charts from "./Charts";
+import transactionsData from "../utils/Transactions.json"; // Import the JSON file
 
 type CategoryType = "Income" | "Expense";
 
 interface Transaction {
-  id: string; // Unique identifier
-  date: string;
-  amount: string;
+  id: number;
+  dateTime: string;
+  amount: number;
+  type: "Income" | "Expense";
   category: string;
   title: string;
-  notes: string;
-  type: "Income" | "Expense";
+  currency: string;
+  note: string;
 }
 
+
 const TransactionManager: React.FC = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>(transactionsData); // Set the initial state to the imported data
   const [currentMonth, setCurrentMonth] = useState(dayjs().startOf("month"));
   const [filteredTransactions, setFilteredTransactions] = useState<{
     [date: string]: Transaction[];
@@ -39,17 +42,9 @@ const TransactionManager: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    // Fetch transactions from localStorage
-    const storedTransactions: Transaction[] = JSON.parse(
-      localStorage.getItem("transactions") || "[]"
-    );
-    setTransactions(storedTransactions);
-  }, []);
-
-  useEffect(() => {
     // Filter and group transactions by month
     let monthTransactions = transactions.filter((transaction) => {
-      const transactionDate = dayjs(transaction.date);
+      const transactionDate = dayjs(transaction.dateTime);
       return (
         transactionDate.month() === currentMonth.month() &&
         transactionDate.year() === currentMonth.year()
@@ -75,12 +70,12 @@ const TransactionManager: React.FC = () => {
 
     // Sort transactions by date in descending order
     const sortedTransactions = monthTransactions.sort((a, b) => {
-      return dayjs(b.date).unix() - dayjs(a.date).unix();
+      return dayjs(b.dateTime).unix() - dayjs(a.dateTime).unix();
     });
 
     const groupedTransactions = sortedTransactions.reduce(
       (acc: { [date: string]: Transaction[] }, transaction) => {
-        const date = dayjs(transaction.date).format("YYYY-MM-DD");
+        const date = dayjs(transaction.dateTime).format("YYYY-MM-DD");
         if (!acc[date]) {
           acc[date] = [];
         }
@@ -115,7 +110,6 @@ const TransactionManager: React.FC = () => {
       updatedTransactions = [...transactions, updatedTransaction];
     }
 
-    localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
     setTransactions(updatedTransactions);
     setShowPopup(false);
     setSelectedTransaction(null);
@@ -141,12 +135,11 @@ const TransactionManager: React.FC = () => {
       (transaction) => transaction.id !== transactionToDelete.id
     );
 
-    localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
     setTransactions(updatedTransactions);
   };
 
   return (
-    <div className="container-md d-flex flex-column mt-2">
+    <div className="container-custom  d-flex flex-column mt-2">
       <div className="month-navigation d-flex justify-content-between bg-secondary rounded">
         <Button onClick={handlePreviousMonth} className="btn btn-secondary">
           <FontAwesomeIcon icon={faArrowLeft} />

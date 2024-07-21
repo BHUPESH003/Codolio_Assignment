@@ -3,6 +3,19 @@
   font-family: "Roboto Condensed", sans-serif;
   font-optical-sizing: auto;
 }
+/* Full width on small screens */
+.container-custom {
+  width: 100%;
+}
+
+/* 75% width on screens medium and up */
+@media (min-width: 576px) {
+  .container-custom {
+    width: 75%;
+    margin: auto; /* Center the container */
+  }
+}
+
 :root {
   --bs-body-bg: #ffffff;
   --bs-body-color: #212529;
