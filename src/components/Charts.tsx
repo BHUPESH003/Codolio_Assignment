@@ -5,16 +5,7 @@ import { prepareChartData } from "../utils/chartUtils"; // Import the data prepa
 import "../styles/charts.css";
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-interface Transaction {
-  id: number;
-  dateTime: string;
-  amount: number;
-  type: "Income" | "Expense";
-  category: string;
-  title: string;
-  currency: string;
-  note: string;
-}
+import { Transaction } from "./types/interface";
 
 interface ChartsProps {
   transactions: Transaction[];
@@ -47,19 +38,21 @@ const Charts: React.FC<ChartsProps> = ({ transactions }) => {
       <div className="chart">
         <Pie data={income} options={options} />
         <div className="total-summary total-income">
-          Total Income: {totalIncome.toLocaleString(undefined, {
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
+          Total Income:{" "}
+          {totalIncome.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          })}
         </div>
       </div>
       <div className="chart">
         <Pie data={expense} options={options} />
         <div className="total-summary total-expense">
-          Total Expenses: {totalExpense.toLocaleString(undefined, {
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
+          Total Expenses:{" "}
+          {totalExpense.toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          })}
         </div>
       </div>
     </div>

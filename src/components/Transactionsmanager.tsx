@@ -11,19 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Charts from "./Charts";
 import transactionsData from "../utils/Transactions.json"; // Import the JSON file
-
+import { Transaction } from "./types/interface";
 type CategoryType = "Income" | "Expense";
 
-interface Transaction {
-  id: number;
-  dateTime: string;
-  amount: number;
-  type: "Income" | "Expense";
-  category: string;
-  title: string;
-  currency: string;
-  note: string;
-}
 
 
 const TransactionManager: React.FC = () => {

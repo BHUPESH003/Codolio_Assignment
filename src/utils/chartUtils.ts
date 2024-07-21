@@ -1,13 +1,4 @@
-interface Transaction {
-  id: number;
-  dateTime: string;
-  amount: number;
-  type: "Income" | "Expense";
-  category: string;
-  title: string;
-  currency: string;
-  note: string;
-}
+import { Transaction } from "../components/types/interface";
 export const prepareChartData = (transactions: Transaction[]) => {
   const incomeData = transactions.filter((t) => t.type === "Income");
   const expenseData = transactions.filter((t) => t.type === "Expense");

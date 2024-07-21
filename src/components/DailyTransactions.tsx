@@ -2,17 +2,8 @@ import React from "react";
 import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Transaction } from "./types/interface";
 
-interface Transaction {
-  id: number;
-  dateTime: string;
-  amount: number;
-  type: "Income" | "Expense";
-  category: string;
-  title: string;
-  currency: string;
-  note: string;
-}
 
 interface DailyTransactionListProps {
   transactionsByDate: { [date: string]: Transaction[] };
@@ -41,7 +32,6 @@ const getCategoryBgColor = (category: string): string => {
 
 const DailyTransactionList: React.FC<DailyTransactionListProps> = ({
   transactionsByDate,
-  onUpdateTransaction,
   onSelectTransaction,
   onDeleteTransaction,
 }) => {

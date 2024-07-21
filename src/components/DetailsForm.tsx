@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Tabs, Tab } from "react-bootstrap";
-import '../styles/TransactioPopup.css'; // Corrected file name
+import "../styles/TransactioPopup.css"; // Corrected file name
+import { Transaction } from "./types/interface";
 
-type CategoryType = "Income" | "Expense";
 
-interface Transaction {
-  id: number;
-  dateTime: string;
-  amount: number;
-  type: "Income" | "Expense";
-  category: string;
-  title: string;
-  currency: string;
-  note: string;
-}
-
-const categories: Record<CategoryType, string[]> = {
+const categories: Record<string, string[]> = {
   Income: ["Salary", "Investment", "Other"],
   Expense: ["Rent", "Utilities", "Groceries", "Entertainment", "Other"],
 };
@@ -38,7 +27,7 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
   transaction,
   onSave,
 }) => {
-  const [activeKey, setActiveKey] = useState<CategoryType>("Income");
+  const [activeKey, setActiveKey] = useState<string>("Income");
   const [form, setForm] = useState<Transaction>({
     id: -100, // Ensure this is included
     dateTime: "",
@@ -46,7 +35,7 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
     category: categories["Income"][0],
     title: "",
     note: "",
-    currency:"",
+    currency: "",
     type: "Income",
   });
 
@@ -62,26 +51,28 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
         category: categories["Income"][0],
         title: "",
         note: "",
-        currency:"",
+        currency: "",
         type: "Income",
       });
     }
   }, [transaction]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
-    setForm(prevForm => ({ ...prevForm, [name]: value }));
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
   const handleTabSelect = (key: string | null) => {
     if (key) {
-      setActiveKey(key as CategoryType);
-      setForm(prevForm => ({
+      setActiveKey(key as string);
+      setForm((prevForm) => ({
         ...prevForm,
-        category: categories[key as CategoryType][0],
-        type: key as CategoryType,
+        category: categories[key as string][0],
+        type: key as string,
       }));
     }
   };
@@ -94,7 +85,7 @@ const TransactionPopup: React.FC<TransactionPopupProps> = ({
       category: categories[activeKey][0],
       title: "",
       note: "",
-      currency:"",
+      currency: "",
       type: activeKey,
     });
   };
