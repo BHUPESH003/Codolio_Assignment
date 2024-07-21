@@ -20,8 +20,8 @@ A modern financial tracker application built with React and Vite. This applicati
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/financial-tracker.git
-   cd financial-tracker
+   git clone https://github.com/bhupesh003/Codolio_Assignment.git
+   cd Codolio_Assignment
    ```
 
 2. **Install Dependencies**
@@ -106,4 +106,4 @@ Contributions are welcome! Please follow these steps to contribute:
 
 ## Contact
 
-For any questions or issues, please contact [your-email@example.com](mailto:ygbhupesh003@gmail.com).
+For any questions or issues, please contact [ygbhupesh003@gmail.com](mailto:ygbhupesh003@gmail.com).
